@@ -30,6 +30,12 @@ import TimelinePost from './TimelinePost.vue'
 
 type Period = 'Today' | 'This Week' | 'This Month'
 
+function delay() {
+  return new Promise(res => {
+    setTimeout(res, 2000)
+  })
+}
+
 export default defineComponent({
   name: 'Timeline',
 
@@ -37,7 +43,8 @@ export default defineComponent({
     TimelinePost
   },
 
-  setup() {
+  async setup() {
+    await delay()
     const periods: Period[] = ['Today', 'This Week', 'This Month']
     const currentPeriod = ref<Period>('Today')
     const posts = computed(() => {
