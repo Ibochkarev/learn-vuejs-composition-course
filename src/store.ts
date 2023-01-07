@@ -1,7 +1,16 @@
 import { reactive, readonly } from "vue";
+import { Post } from "./mocks";
 
 interface State {
-  test: string;
+  posts: PostState;
+}
+
+interface PostState {
+  ids: string[]
+
+  all: Map<string, Post>
+
+  loaded: boolean
 }
 
 class Store {
@@ -14,12 +23,14 @@ class Store {
   getState() {
     return readonly(this.state)
   }
-
-  updateTest(test: string) {
-    this.state.test = test
-  }
 }
 
 const store = new Store({
-  test: "test"
+  posts: {
+    all: new Map(),
+    ids: [],
+    loaded: false
+  },
 })
+
+store.getState().posts.loaded
